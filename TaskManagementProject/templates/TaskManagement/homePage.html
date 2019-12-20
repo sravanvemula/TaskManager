@@ -6,10 +6,7 @@
     <div class="container">
       <div class = "jumbotron" style="color: #5bc0de;width: 100%">
         <div class="container">
-          <form action="{% url 'TaskManagement:exportcreated' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" class="btn btn-primary" value="Export" name="all">
-          </form>
+          <a href="{%url 'TaskManagement:createNewTask'%}"><input type="submit" class="btn btn-primary" value="Create Task"></a>
         </div><br>
         <div class="container">
       <ul class="nav nav-pills">
@@ -40,6 +37,10 @@
         </tr>
         {% endfor %}
       </table>
+      <form action="{% url 'TaskManagement:exportcreated' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Export" name="all">
+      </form>
         {% else %}
           <div class="container">
             <div class = "jumbotron">

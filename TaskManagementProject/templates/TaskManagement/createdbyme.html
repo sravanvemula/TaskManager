@@ -8,11 +8,7 @@
         <div class="container">
           <!-- <a href="{%url 'TaskManagement:exportcreated'%}">
             <input type="submit" class="btn btn-primary" value="Export Data"></a> -->
-            <form action="{% url 'TaskManagement:exportcreated' %}" method="post">
-              {% csrf_token %}
-              <a href="{%url 'TaskManagement:createNewTask'%}"><input type="submit" class="btn btn-primary" value="Create Task"></a>
-              <input type="submit" class="btn btn-primary" value="Export" name="created">
-            </form><br>
+            <a href="{%url 'TaskManagement:createNewTask'%}"><input type="submit" class="btn btn-primary" value="Create Task"></a>
         </div>
         <div class="container">
       <ul class="nav nav-pills">
@@ -43,6 +39,11 @@
         </tr>
         {% endfor %}
         </table>
+        <form action="{% url 'TaskManagement:exportcreated' %}" method="post">
+          {% csrf_token %}
+
+          <input type="submit" class="btn btn-primary" value="Export" name="created">
+        </form>
         {% else %}
           <div class="container">
             <div class = "jumbotron">
