@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from TaskManagement import forms
 from django.urls import reverse
+import mimetypes
+from django.utils.encoding import smart_str
+import os
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
@@ -9,7 +12,12 @@ from django.contrib.auth.forms import UserCreationForm
 from TaskManagement.models import Tasks, Status, Drafts
 from django.views.generic.edit import FormView, CreateView
 from random import randint
+import datetime
+from TaskManagementProject import settings
+from wsgiref.util import FileWrapper
+import pandas as pd
 import json
+from django.core.files.storage import default_storage
 # Create your views here
 def index(request):
     my_dict = {'insert_me':"Welcome to the Home page"}
@@ -231,5 +239,38 @@ def discard(request):
         return showdrafts(request)
     return render(request,'TaskManagement/delete.html',{'user':user,'formdata':formdata})
 
-def indexhome(request):
-    return render(request,"TaskManagement/index_home.html")
+@login_required
+def exportcreated(request):
+    user = request.session['user']
+    state=''
+    if request.method == 'POST' and 'created' in list(request.POST):
+        tasks = Tasks.objects.filter(createdBy=user)
+        state='createdBy'+str(user)
+    elif request.method == 'POST' and 'assigned' in list(request.POST):
+        tasks = Tasks.objects.filter(assignedTo=user)
+        state='Assignedto'+str(user)
+    elif request.method == 'POST' and 'drafts' in list(request.POST):
+        tasks = Drafts.objects.filter(createdBy=user)
+        state='DraftsCreatedBy'+str(user)
+    elif request.method =='POST' and 'all' in list(request.POST):
+        tasks = Tasks.objects.all()
+        state='allTasks'+str(user)
+    else:
+        tasks= Tasks.objects.all()
+    df = tasks.to_dataframe()
+    date =datetime.datetime.now()
+    formateddate = str(date.year)+str(date.month)+str(date.day)
+    filename = 'CSVfile'+state+formateddate+'.csv'
+    df.to_csv(settings.MEDIA_ROOT+'/'+filename)
+    file_path = settings.MEDIA_ROOT +'/'+ filename
+    file_wrapper = FileWrapper(open(file_path,'rb'))
+    file_mimetype = mimetypes.guess_type(file_path)
+    response = HttpResponse(file_wrapper)
+    response['X-Sendfile'] = file_path
+    response['Content-Length'] = os.stat(file_path).st_size
+    response['Content-Disposition'] = 'attachment; filename='+filename
+
+    return response
+
+
+    # return homePage(request)

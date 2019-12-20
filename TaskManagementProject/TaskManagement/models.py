@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_pandas.managers import DataFrameManager
 
 # Create your models here.
 class UserProfileInfo(models.Model):
@@ -10,6 +11,8 @@ class UserProfileInfo(models.Model):
 class Status(models.Model):
     statusId = models.IntegerField(primary_key=True)
     statusValue = models.CharField(max_length=100)
+
+    objects = DataFrameManager()
 
     def __str__(self):
         return self.statusValue
@@ -26,6 +29,8 @@ class Tasks(models.Model):
     remarks = models.TextField()
     status = models.ForeignKey(Status, on_delete='', default=1)
 
+    objects = DataFrameManager()
+
     def __str__(self):
         return self.taskId
 
@@ -41,5 +46,7 @@ class Drafts(models.Model):
     lastModifiedBy = models.CharField(max_length=30)
     remarks = models.TextField()
     status = models.ForeignKey(Status, on_delete='', default=4)
+
+    objects = DataFrameManager()
     def __str__(self):
         return self.taskId

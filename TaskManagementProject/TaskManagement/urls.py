@@ -16,5 +16,5 @@ urlpatterns = [
     url(r'^drafts/',views.showdrafts,name='drafts'),
     url(r'^editAndSubmit/',views.editAndSubmit,name='editAndSubmit'),
     url(r'^discard/',views.discard,name='discard'),
-    url(r'^indexhome/',views.indexhome,name='indexhome'),
+    url(r'^exportcreated/',views.exportcreated,name='exportcreated'),
 ]

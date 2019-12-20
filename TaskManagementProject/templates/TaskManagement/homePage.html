@@ -4,8 +4,13 @@
 {% block body_block %}
   {% if user.is_authenticated and tasks %}
     <div class="container">
-      <div class = "jumbotron" style="color: #5bc0de;">
-        <div class="container"></div>
+      <div class = "jumbotron" style="color: #5bc0de;width: 100%">
+        <div class="container">
+          <form action="{% url 'TaskManagement:exportcreated' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Export" name="all">
+          </form>
+        </div><br>
         <div class="container">
       <ul class="nav nav-pills">
         <li class="nav-item"><a class="nav-link active" href="{% url 'TaskManagement:homePage' %}"><h5>All Tasks<h5></a></li>

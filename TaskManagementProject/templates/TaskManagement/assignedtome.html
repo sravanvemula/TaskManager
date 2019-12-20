@@ -7,8 +7,12 @@
     <div class="container">
       <div class = "jumbotron">
         <div class="container">
-          <a href="{% url 'TaskManagement:updateTask' %}"><input type="submit" value="Update Task" class="btn btn-primary"></a>
-        </div>
+          <form action="{% url 'TaskManagement:exportcreated' %}" method="post">
+            {% csrf_token %}
+            <a href="{% url 'TaskManagement:updateTask' %}"><input type="submit" value="Update Task" class="btn btn-primary"></a>
+            <input type="submit" class="btn btn-primary" value="Export" name="assigned">
+          </form>
+        </div><br>
         <div class="container">
       <ul class="nav nav-pills">
         <li class="nav-item"><a class="nav-link" href="{% url 'TaskManagement:homePage' %}"><h5>All Tasks<h5></a></li>

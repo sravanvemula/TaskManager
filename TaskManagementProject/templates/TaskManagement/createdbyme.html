@@ -5,7 +5,15 @@
   {% if user.is_authenticated and tasks %}
     <div class="container">
       <div class = "jumbotron">
-        <div class="container"><a href="{%url 'TaskManagement:createNewTask'%}"><input type="submit" class="btn btn-primary" value="Create Task"></a></div>
+        <div class="container">
+          <!-- <a href="{%url 'TaskManagement:exportcreated'%}">
+            <input type="submit" class="btn btn-primary" value="Export Data"></a> -->
+            <form action="{% url 'TaskManagement:exportcreated' %}" method="post">
+              {% csrf_token %}
+              <a href="{%url 'TaskManagement:createNewTask'%}"><input type="submit" class="btn btn-primary" value="Create Task"></a>
+              <input type="submit" class="btn btn-primary" value="Export" name="created">
+            </form><br>
+        </div>
         <div class="container">
       <ul class="nav nav-pills">
         <li class="nav-item"><a class="nav-link" href="{% url 'TaskManagement:homePage' %}"><h5>All Tasks<h5></a></li>
