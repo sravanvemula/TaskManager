@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends "TaskManagement/base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="jumbotron">
+  {% if user %}
+  <a href="{% url 'TaskManagement:createdbyme' %}"><input type="submit" class="btn btn-primary" value="Back"></a><br><br>
+  <form method="POST" action="{% url 'TaskManagement:createNewTask' %}">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+    {{listForm.as_table}}
+    <!-- <label for="Assign_to">Assign To: </label>
+    <select name="Assign_to">
+        {% if users %}
+      {% for user in users %}
+        <option value="{{user.username}}" name="assignedTo">{{ user.username }}</option>
+      {% endfor %}
+    {% else %}
+      <option>No artists found.</option>
+    {% endif %}
+
+  </select>
+    </div>
+
+  </div>
+
+</div> -->
+</table><br>
+    <input type="submit" class="btn btn-primary" value="submit" name="createtask">
+      <input type="submit" class="btn btn-primary" value="Save As Draft" name="savetask">
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

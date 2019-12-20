@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends "TaskManagement/base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="jumbotron">
+  <a href="{% url 'TaskManagement:assignedtome' %}"><input type="submit" class="btn btn-primary" value="Back"></a><br><br>
+  <form method="POST" action="{% url 'TaskManagement:updateTask' %}">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+    <tr><td><label for="TaskId"><h6><b>Task Id:</b></h6></label></td>
+    <td><select name="TaskId">
+      {% for task in taskDetails %}
+      <option value="{{task.taskId}}">{{task.taskId}}</option>
+      {% endfor %}
+    </select></td></tr>
+  </table>
+  <input type="submit" value = "Update Task" class="btn btn-primary">
+  </form>
+</div>
+{% endblock %}

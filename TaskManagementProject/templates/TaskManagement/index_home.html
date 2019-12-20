@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    #signup{
+      position: absolute;
+      right: 0px;
+      width: 300px;
+      padding: 10px;
+      top: 100px;
+    }
+    #login{
+      position: absolute;
+      right: 0px;
+      width: 300px;
+      padding: 10px;
+      top: 100px;
+      display: none;
+    }
+    </style>
+    <script>
+    function myFunction() {
+  var x = document.getElementById("login");
+  if (x.value == "login"){
+    x.value="Sign up"
+    document.getgetElementById("signup").style.disply="None";
+  }
+  else{
+    x.value = "login"
+    document.getgetElementById("login").style.disply="None";
+  }
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <nav class = "navbar navbar-expand-sm bg-light navbar-light">
+      <div class="container">
+        <ul class="navbar-nav">
+          <!-- <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a></li> -->
+
+          <li class="nav-item active"><a class="nav-link" href="#"><h3>Task Manager<h3></a></li>
+          <li class="nav-item active"><a id=login onclick="myfunction()">Login</a></li>
+    <div class="container"id=signup>
+      <table>
+      <tr><td>Username:</td></tr><br>
+      <tr><td><input type="text" name="" value=""></td></tr><br>
+      <tr><td>Password:</td></tr><br>
+      <tr><td><input type="password" name="" value=""></td></tr><br>
+      <tr><td>Email:</td></tr><br>
+      <tr><td><input type="text" name="" value=""></td></tr><br>
+      <tr><td><input type="submit" name="" value="Sign up" class="btn btn-primary"></td></tr>
+    </table>
+  </div>
+  <div class="container"id=login>
+    <table>
+    <tr><td>Username:</td></tr><br>
+    <tr><td><input type="text" name="" value=""></td></tr><br>
+    <tr><td>Password:</td></tr><br>
+    <tr><td><input type="password" name="" value=""></td></tr><br>
+    <tr><td>Email:</td></tr><br>
+    <tr><td><input type="text" name="" value=""></td></tr><br>
+    <tr><td><input type="submit" name="" value="Sign up" class="btn btn-primary"></td></tr>
+  </table>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends "TaskManagement/base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="jumbotron">
+  {% if formdata %}
+  <form method="POST">
+
+    <p>Select Task:</p>
+    {% csrf_token %}
+
+    <select onchange="this.form.submit()" name='taskId'>
+      <option value="">Select</option>
+  {% for data in formdata %}
+<option value={{data.taskId}}>{{data.taskId}}</option>
+  {% endfor %}
+</select>
+</form>
+  {% endif %}
+  {% if taskdata %}
+  <a href="{% url 'TaskManagement:discard' %}"><input type="submit" class="btn btn-primary" value="Back"></a>
+  <form method="POST" action="{% url 'TaskManagement:discard' %}">
+    {% csrf_token %}
+    <table>
+    {% for task in taskdata %}
+    <tr>
+    <td><label for="taskId">Task Id:</label></td>
+    <td><input type="text" name="taskId" readonly value={{task.taskId}}><br></td></tr>
+    <tr><td><label for="taskName">Task Name</label></td>
+    <td><input type="text" name="taskName" value={{task.taskName}}><br></td></tr>
+    <tr><td><label for="description">Task Description</label></td>
+    <td><textarea name="description" rows="8" cols="80">{{task.taskDescription}}</textarea><br></td></tr>
+    <tr>
+    <td><input type="submit" name="deleteTask" value="Discard" class="btn btn-danger"></td>
+  </tr>
+    {% endfor %}
+  </table>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

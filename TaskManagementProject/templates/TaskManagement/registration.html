@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends "TaskManagement/base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="jumbotron" style="width: 500px;left: 0px;">
+  {% if registered %}
+  <h1>Thank you for registering</h1>
+  <a href="{% url 'TaskManagement:index' %}">
+      <input type="submit" class="btn btn-primary" value="Home">
+  </a>
+  <a href="{% url 'TaskManagement:userLogin' %}">
+      <input type="submit" class="btn btn-primary" value="Login">
+  </a>
+  {% else %}
+  <h3>Register here:</h3><br>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+      <div class="form-group row" style="text-align: center">
+    {{UserForm.as_table}}
+  </div>
+  </table>
+    <input type="submit" class="btn btn-primary" value="submit">
+  </form>
+  {% endif %}
+</div>
+
+{% endblock %}

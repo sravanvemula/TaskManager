@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends "TaskManagement/base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+<body onload="document.frm1.submit()">
+  <div class="jumbotron">
+    {% if user.is_authenticated %}
+    <form method="POST" name="frm1">
+      {% csrf_token %}
+    </form>
+    {% else %}
+  <p>{{insert_me|upper}}</p>
+      {% csrf_token %}
+  <p>If you are a new user...Please Signup, else click login</p>
+</div>
+</body>
+{% endif %}
+{% endblock %}

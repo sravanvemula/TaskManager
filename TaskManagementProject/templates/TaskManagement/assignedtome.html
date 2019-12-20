@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends "TaskManagement/base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+  {% if user.is_authenticated and tasks %}
+  <!-- <h3>Welcome {{user}}</h3> -->
+    <div class="container">
+      <div class = "jumbotron">
+        <div class="container">
+          <a href="{% url 'TaskManagement:updateTask' %}"><input type="submit" value="Update Task" class="btn btn-primary"></a>
+        </div>
+        <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a class="nav-link" href="{% url 'TaskManagement:homePage' %}"><h5>All Tasks<h5></a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'TaskManagement:assignedtome'%}"><h5>Assigned to Me<h5></a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'TaskManagement:createdbyme'%}"><h5>Created by Me<h5></a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'TaskManagement:drafts' %}"><h5>Drafts<h5></a></li>
+      </ul>
+      <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th>Task Id</th>
+          <th>Task Name</th>
+          <th>Task Description</th>
+          <th>Created Date</th>
+          <th>Created By</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        {% for task in tasks %}
+        <tr>
+          <td>{{task.taskId}}</td>
+          <td>{{task.taskName}}</td>
+          <td>{{task.taskDescription}}</td>
+          <td>{{task.createdDate}}</td>
+          <td>{{task.createdBy}}</td>
+          <td>{{task.status}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        {% else %}
+          <div class="container">
+            <div class = "jumbotron">
+            <ul class="nav nav-pills">
+              <li class="nav-item"><a class="nav-link" href="{% url 'TaskManagement:homePage' %}"><h5>All Tasks<h5></a></li>
+              <li class="nav-item"><a class="nav-link active" href="{% url 'TaskManagement:assignedtome'%}"><h5>Assigned to Me<h5></a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'TaskManagement:createdbyme'%}"><h5>Created by Me<h5></a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'TaskManagement:drafts' %}"><h5>Drafts<h5></a></li>
+            </ul>
+        <p align="center">No Tasks are assigned to you yet!!</p>
+    {% endif %}
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+  {% endblock %}

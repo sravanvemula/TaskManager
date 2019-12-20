@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends "TaskManagement/base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="jumbotron" style="width: 500px;left: 0px;">
+  <h1>Login Here!!</h1>
+  <form action="{% url 'TaskManagement:userLogin' %}" method="POST" >
+    {% csrf_token %}
+    <div class="form-group row" style="text-align: center">
+    <table>
+      <div class="col-xs-2">
+      <tr>
+        <td><label for="username"><h6>Username:</h6></label></td>
+        <td><input type="text" name="username" placeholder="Username" class="form-control"><br></td>
+      </tr><br>
+    </div>
+    <div class="col-xs-2">
+      <tr>
+        <td><label for="password"><h6>Password:</h6></label></td>
+        <td><input type="password" name="password" class="form-control"></td>
+      </tr><br>
+    </div>
+    <div>
+      <tr>
+        <td><input type="submit" value="Login" class="btn btn-primary"></td>
+      </tr>
+    </div>
+      </table>
+    </div>
+  </form>
+</div>
+{% endblock %}
