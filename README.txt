@@ -24,3 +24,4 @@ Created by: Sravan Vemula
 Programming language: Python
 Web framework: Django
 Front end: HTML, CSS, Javascript, Jquery.
+Database: SQLite
