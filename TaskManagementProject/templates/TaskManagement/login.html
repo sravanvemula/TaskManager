@@ -4,6 +4,9 @@
 {% block body_block %}
 <div class="jumbotron" style="width: 500px;left: 0px;">
   <h1>Login Here!!</h1>
+  {% if error %}
+  <p class="text-danger">{{error}}</p>
+  {% endif %}
   <form action="{% url 'TaskManagement:userLogin' %}" method="POST" >
     {% csrf_token %}
     <div class="form-group row" style="text-align: center">

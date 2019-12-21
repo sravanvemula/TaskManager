@@ -69,11 +69,11 @@ def userLogin(request):
                 request.session['user'] = data['user']
                 return render(request,'TaskManagement/homePage.html',data)
             else:
-                return HttpResponse("Account not active")
+                error = "User Not found..Please Signup and try again..."
+                return render(request, 'TaskManagement/login.html',{'error':error})
         else:
-            print("Someone tried to login and failed")
-            print("username: {} and passowrd: {}".format(username,password))
-            return HttpResponse("Invalid login details supplied")
+            error = "Invalid Credentails...Please try again.."
+            return render(request, 'TaskManagement/login.html',{'error':error})
     else:
         return render(request, 'TaskManagement/login.html',{})
 
